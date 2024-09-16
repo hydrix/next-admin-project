@@ -1,5 +1,6 @@
 "use client";
 
+
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TypographyH3 } from "@/components/typography/h3";
@@ -11,6 +12,7 @@ const Users = () => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
 
   const [data, setData] = useState([]);
+
 
   useEffect(() => {
     fetch("/api/users")
@@ -33,9 +35,6 @@ const Users = () => {
         </CardHeader>
         <CardContent>
           <UsersTable data={data} />
-          <div className="flex justify-center p-8">
-            <Button variant="outline">Load more...</Button>
-          </div>
         </CardContent>
       </Card>
 
@@ -45,3 +44,5 @@ const Users = () => {
 };
 
 export default Users;
+
+/*{data?.slice(0, click).map((item, index) => */
