@@ -44,5 +44,3 @@ const Users = () => {
 };
 
 export default Users;
-
-/*{data?.slice(0, click).map((item, index) => */

@@ -51,7 +51,7 @@ export function UsersTable(props) {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </TableHead>
-                <TableHead>{data[0].firstname}</TableHead>
+                <TableHead >{data[0].firstname}</TableHead>
                 <TableHead>{data[0].lastname}</TableHead>
                 <TableHead>{data[0].email}</TableHead>
                 <TableHead className="w-1">
