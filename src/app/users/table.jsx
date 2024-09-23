@@ -18,14 +18,24 @@ import { Input } from "@/components/ui/input";
 import { MoreHorizontal, Settings } from "lucide-react"
 
 export function UsersTable(props) {
-  const { data } = props; 
+  const { data, limit } = props; 
 
-  const [click, setClick] = useState(10);
+  //const [click, setClick] = useState(10);
+
+  const [search, setSearch] = useState("");
+
+  let filteredData = data.filter((item) => {
+    return (
+      item.firstname.toLowerCase().includes(search.toLocaleLowerCase()) ||
+      item.lastname.toLowerCase().includes(search.toLocaleLowerCase()) ||
+      item.email.toLowerCase().includes(search.toLocaleLowerCase()) 
+    );
+  });
 
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
-        <Input placeholder="Нэрээр хайх..."  className="max-w-sm" />
+        <Input placeholder="Нэрээр хайх..." value={search} onChange={(e) => setSearch(e.target.value)} className="max-w-sm" />
       </div>
       <div className="border rounded-md">
         <Table>
@@ -42,7 +52,7 @@ export function UsersTable(props) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data?.slice(0, click).map((item, index) => (
+            {filteredData?.slice(0, limit).map((item, index) => (
             <TableRow key={item.id}>
                 <TableCell>{index + 1}</TableCell>
                 <TableHead>
@@ -51,9 +61,9 @@ export function UsersTable(props) {
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </TableHead>
-                <TableHead >{data[0].firstname}</TableHead>
-                <TableHead>{data[0].lastname}</TableHead>
-                <TableHead>{data[0].email}</TableHead>
+                <TableHead >{item.firstname}</TableHead>
+                <TableHead>{item.lastname}</TableHead>
+                <TableHead>{item.email}</TableHead>
                 <TableHead className="w-1">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -75,9 +85,6 @@ export function UsersTable(props) {
             ))}
           </TableBody>
         </Table>
-      </div>
-      <div className="flex justify-center p-8">
-        <Button variant="outline" onClick={() => setClick(click + 10)} >Load more...</Button>
       </div>
     </div>
   );

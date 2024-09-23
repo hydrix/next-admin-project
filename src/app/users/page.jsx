@@ -7,11 +7,14 @@ import { TypographyH3 } from "@/components/typography/h3";
 import { UsersTable } from "./table";
 import { UserCreateDialog } from "./user-create-dialog";
 import { useEffect, useState } from "react";
+import { Literata } from "next/font/google";
 
 const Users = () => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
 
   const [data, setData] = useState([]);
+
+  const [limit, setLimit] = useState(10);
 
 
   useEffect(() => {
@@ -34,10 +37,14 @@ const Users = () => {
           </div>
         </CardHeader>
         <CardContent>
-          <UsersTable data={data} />
+          <UsersTable limit={limit} data={data}/>
+          <div className="flex justify-center p-8">
+            {data.length > limit && (
+              <Button variant="outline" onClick={() => setLimit(limit + 10)} >Load more...</Button>
+            )}
+      </div>
         </CardContent>
       </Card>
-
       <UserCreateDialog open={createModalOpen} onClose={setCreateModalOpen} />
     </div>
   );
