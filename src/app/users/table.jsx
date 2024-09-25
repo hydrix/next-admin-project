@@ -18,9 +18,7 @@ import { Input } from "@/components/ui/input";
 import { MoreHorizontal, Settings } from "lucide-react"
 
 export function UsersTable(props) {
-  const { data, limit } = props; 
-
-  //const [click, setClick] = useState(10);
+  const { data, limit, onDelete, onEdit } = props; 
 
   const [search, setSearch] = useState("");
 
@@ -76,8 +74,13 @@ export function UsersTable(props) {
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
                       <DropdownMenuItem onClick={() => navigator.clipboard.writeText("temkanibno@gmail.com")}>Copy Email</DropdownMenuItem>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem>Delete</DropdownMenuItem>
+                      <DropdownMenuItem onClick = {() => {
+                        onEdit(item.id);
+                        }}>Edit</DropdownMenuItem>
+                      <DropdownMenuItem onClick = {() => {
+                        onDelete(item.id);
+                        }}
+                        >Delete</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableHead>
